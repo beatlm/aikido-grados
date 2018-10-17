@@ -1,5 +1,4 @@
 import { FormImageLoadComponent } from './../form-image-load/form-image-load.component';
-import { FormTablePasosComponent } from './../form-table-pasos/form-table-pasos.component';
 import { FormTableComponent } from './../form-table/form-table.component';
 import { Directive, Input, ComponentFactoryResolver, ViewContainerRef } from '@angular/core';
 import { FormGroup } from '@angular/forms';
@@ -12,7 +11,6 @@ const components = {
     input: FormInputComponent,
     select: FormSelectComponent,
     table: FormTableComponent,
-    tablePasos: FormTablePasosComponent,
     file:FormImageLoadComponent
   };
 
