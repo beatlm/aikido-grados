@@ -9,7 +9,7 @@ import { FormGroup } from '@angular/forms';
     [formGroup]="group">
     <label>{{ config.label }}</label>
     <input
-    [attr.disabled]="config.disabled"
+      [attr.disabled]="config.disabled"
       [attr.type]="config.inputType"
       [class] ="config.class"
       [attr.placeholder]="config.placeholder"

@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~bootstrap/dist/css/bootstrap.css';
+
+div.container{
+    margin-left: 36%;
+    width: 25%;
+}
+.form-group{
+    width: 50%;
+    margin-left: 25%;
+}

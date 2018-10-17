@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { DynamicFormComponent } from "../../dynamic-form/containers/dynamic-form/dynamic-form.component";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-create",
@@ -7,8 +8,6 @@ import { DynamicFormComponent } from "../../dynamic-form/containers/dynamic-form
   styleUrls: ["./create.component.css"]
 })
 export class CreateComponent implements OnInit {
-
-
   private files = []; //TODO revisar si es necesario
   @ViewChild(DynamicFormComponent)
   public recipeForm: DynamicFormComponent;
@@ -16,64 +15,93 @@ export class CreateComponent implements OnInit {
     {
       name: "name",
       type: "input",
+      label:"Nombre",
       placeholder: "Nombre",
-      divClass: "leftIntputText"
+      divClass: "container-fluid",
+      class:"form-control"
     },
     {
       name: "email",
       type: "input",
+      label:"email",
+      inputType:"email",
       placeholder: "e-mail",
-      divClass: "leftIntputText"
+      divClass: "container-fluid",
+      class:"form-control"
     },
     {
       name: "grado",
       type: "select",
       label: "Grado solicitado",
-      options:["Sodan", "Nidan o superiores"],
+      options: ["Sodan", "Nidan o superiores"],
+      class:"form-control",
+      divClass: "container-fluid",
+      inputType:"hidden"
     },
     {
       name: "status",
       type: "select",
       label: "Estado",
-      options:["Alta", "Email","Cobrado","Enviado","Entregado"],
-
+      options: ["Alta", "Email", "Cobrado", "Enviado", "Entregado"],
+      class:"form-control",
+      divClass: "container-fluid",
+      value:"03-12-2016"
     },
     {
       name: "date",
       type: "input",
       placeholder: "Fecha del estado",
-      divClass: "leftIntputText",
-      disabled:"true"
+      divClass: "container-fluid",
+      disabled: "true",
+      class:"form-control",
+      hidden:"true"
     },
     {
       name: "file",
       type: "file",
       placeholder: "Fichero de alta",
-      divClass: "leftIntputText",
+      divClass: "container-fluid",
+      class:"form-control-file",
+      label:"Fichero de solicitud"
     },
     {
       name: "paymentFile",
       type: "file",
       placeholder: "Justificante de pago",
-      divClass: "leftIntputText",
+      divClass: "container-fluid",
+      class:"form-control-file",
+      label:"Justificante de pago"
     },
-    
+
     {
       name: "saveButton",
       label: "Guardar",
       type: "button",
-      class: "bigButton",
-      buttonType: "submit"
+      class:"btn btn-primary",
+      buttonType: "submit",
+      click: (value) => {
+        this.formSubmitted(value);
+      }
+    },
+    {
+      name: "cancelButton",
+      type: "button",
+      label: "Cancelar",
+      buttonType: "button",
+      class:"btn btn-secondary",
+      click: () => {
+        this.back();
+      }
     }
   ];
-
-  constructor() {}
-
-  ngOnInit() {
+  private back() {
+    this.router.navigate([""]);
   }
+  constructor(private router: Router) {}
+
+  ngOnInit() {}
 
   formSubmitted(value) {
     console.log(value);
-    
   }
 }

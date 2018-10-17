@@ -5,12 +5,14 @@ import { FormGroup, FormBuilder } from "@angular/forms";
   selector: "mr-dynamic-form",
   template: `
   <form [formGroup]="form"  (ngSubmit)="submitted.emit(form.value)">
+  <div class="form-group">
   <ng-container
         *ngFor="let field of config;"
         dynamicField
         [config]="field"
         [group]="form">
       </ng-container>
+      </div>
   </form>
   `,
   styles: []
@@ -23,7 +25,7 @@ export class DynamicFormComponent implements OnInit {
 
   @Output()
   submitted: EventEmitter<any> = new EventEmitter<any>();
-  
+
   constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
@@ -32,7 +34,10 @@ export class DynamicFormComponent implements OnInit {
   createGroup() {
     const group = this.fb.group({});
     this.config.forEach(control =>
-      group.addControl(control.name, this.fb.control({value: '', disabled: false}))
+      group.addControl(
+        control.name,
+        this.fb.control({ value: "", disabled: false })
+      )
     );
     return group;
   }

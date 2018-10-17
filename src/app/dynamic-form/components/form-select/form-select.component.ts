@@ -7,11 +7,18 @@ import { FormGroup } from "@angular/forms";
   <div [class]= "config.divClass"
   [formGroup]="group">
   <label>{{ config.label }}</label>
-  <select [formControlName]="config.name">
+  <select [formControlName]="config.name" [class]="config.class">
     <option *ngFor="let option of config.options">
       {{ option }}
     </option>
   </select>
+  <input disabled
+  [value]="config.value"
+  [attr.type]="config.inputType"
+  [class] ="config.class"
+  [attr.placeholder]="config.placeholder"
+  [formControlName]="config.name"
+  />
 </div>
   `,
   styles: []

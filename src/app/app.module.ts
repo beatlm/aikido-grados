@@ -7,12 +7,14 @@ import { CreateComponent } from './views/create/create.component';
 import { AppRoutingModule } from './app.routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DynamicFormModule } from './dynamic-form/dynamic-form.module';
+import { SearchComponent } from './views/search/search.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     CreateComponent,
+    SearchComponent,
     
   ],
   imports: [

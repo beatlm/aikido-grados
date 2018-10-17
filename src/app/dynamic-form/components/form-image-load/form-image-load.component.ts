@@ -7,6 +7,7 @@ import { FormGroup } from '@angular/forms';
   <div [class]= "config.divClass"
   [formGroup]="group">
       <div class="btn">
+         <label>{{ config.label }}</label> 
           <input  [formControlName]="config.name" type="file" (change)="config.change($event)" >
       </div>
     

@@ -9,7 +9,8 @@ import { FormGroup } from '@angular/forms';
   <table [class] ="config.class">
   <tr *ngFor="let data of config.list;let i = index">
       <td>{{data.name}}</td>
-      <td>{{data.amount}}</td>
+      <td>{{data.email}}</td>
+      <td>{{data.status}}</td>
       <td>
           <a class="btn-small" (click)="config.click(i)">
               <i class="material-icons left">delete</i>
