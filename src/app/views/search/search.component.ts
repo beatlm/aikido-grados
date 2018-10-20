@@ -1,3 +1,4 @@
+import { UserServiceService } from './../../services/user-service.service';
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { DynamicFormComponent } from "../../dynamic-form/containers/dynamic-form/dynamic-form.component";
 import { UserModel } from "../../models/UserModel";
@@ -23,8 +24,8 @@ export class SearchComponent implements OnInit {
       name: "table",
       type: "table",
       list: [
-        new UserModel("pepe", "pepe@gmail.com", "activo", "20180917", "shidan"),
-        new UserModel("Roberto", "rover_mp@gmail.com", "activo", "20180917", "nodan")
+       // new UserModel("pepe", "pepe@gmail.com", "activo", "20180917", "shidan"),
+        //new UserModel("Roberto", "rover_mp@gmail.com", "activo", "20180917", "nodan")
       ]
     },
 
@@ -39,11 +40,25 @@ export class SearchComponent implements OnInit {
       }
     }
   ];
-  constructor(private router: Router) {}
+  constructor(private router: Router,
+    private userService: UserServiceService) {}
 
   ngOnInit() {}
 
   private addUser() {
     this.router.navigate(["create"]);
   }
+public search(){
+  this.userService
+      .getUserList$()
+      .subscribe(this.showUsers.bind(this), this.catchError.bind(this));
+}
+private showUsers(resultado: UserModel[]) {
+  this.myForm.config[0].list = resultado;
+}
+
+
+private catchError(err) {
+console.log("error "+err);
+}
 }

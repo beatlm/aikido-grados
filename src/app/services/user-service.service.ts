@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Observable } from 'rxjs/Observable';
 
-
 @Injectable()
 export class UserServiceService {
 
@@ -17,5 +16,18 @@ export class UserServiceService {
   public saveUser$(user: UserModel): Observable<any> {
     return this.http.post(this.url, user);
   }
+
+  public getUserList$(): Observable<UserModel[]> {
+    return this.http.get<UserModel[]>(this.url).map((result: any) => {
+      console.log(result.content); //<--it's an object
+      if (result.page.totalElements > 0) {
+        return result.content; //just return "recipes"
+      } else {
+        return null; //TODO ¿Como hacer que no devuelva nada si no hay hnada?
+      }
+    });
+  }
+
+
   
 }

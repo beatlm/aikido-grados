@@ -1,13 +1,15 @@
+import { UserServiceService } from './services/user-service.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-
+import 'rxjs/add/operator/map';
 import { AppComponent } from './app.component';
 import { CreateComponent } from './views/create/create.component';
 import { AppRoutingModule } from './app.routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DynamicFormModule } from './dynamic-form/dynamic-form.module';
 import { SearchComponent } from './views/search/search.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -19,9 +21,9 @@ import { SearchComponent } from './views/search/search.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,ReactiveFormsModule,DynamicFormModule
+    AppRoutingModule,ReactiveFormsModule,DynamicFormModule, HttpClientModule
   ],
-  providers: [],
+  providers: [UserServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

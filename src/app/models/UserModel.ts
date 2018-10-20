@@ -1,3 +1,5 @@
+import { UserFormModel } from "./UserFormModel";
+
 export class UserModel {
     public name: string;
     public email: string;
@@ -23,4 +25,18 @@ export class UserModel {
       this.file=file;
       this.paymentFile=paymentFile;
     }
+   
+    static fromData(data: UserFormModel) {
+      let { name, email, status, grado, file, paymentFile } = data;
+      return new this(
+        data.name,
+        data.email,
+        data.status,
+        "2018-09-10",
+        data.grado,
+        "",
+        "paymentFile"
+      );
+    }
+  
   }
