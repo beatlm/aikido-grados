@@ -33,7 +33,7 @@ export class CreateComponent implements OnInit {
       name: "grado",
       type: "select",
       label: "Grado solicitado",
-      options: ["Sodan", "Nidan o superiores"],
+      options: ["Shodan", "Nidan o superiores"],
       class:"form-control",
       divClass: "container-fluid",
       inputType:"hidden"
@@ -44,23 +44,14 @@ export class CreateComponent implements OnInit {
       label: "Estado",
       options: ["Alta", "Email", "Cobrado", "Enviado", "Entregado"],
       class:"form-control",
-      divClass: "container-fluid",
+      divClass: "container-fluid ",
       value:"03-12-2016"
-    },
-    {
-      name: "date",
-      type: "input",
-      placeholder: "Fecha del estado",
-      divClass: "container-fluid",
-      disabled: "true",
-      class:"form-control",
-      hidden:"true"
     },
     {
       name: "file",
       type: "file",
       placeholder: "Fichero de alta",
-      divClass: "container-fluid",
+      divClass: "file-select container-fluid",
       class:"form-control-file",
       label:"Fichero de solicitud"
     },
@@ -68,7 +59,7 @@ export class CreateComponent implements OnInit {
       name: "paymentFile",
       type: "file",
       placeholder: "Justificante de pago",
-      divClass: "container-fluid",
+      divClass: "file-select container-fluid",
       class:"form-control-file",
       label:"Justificante de pago"
     },
@@ -77,8 +68,9 @@ export class CreateComponent implements OnInit {
       name: "saveButton",
       label: "Guardar",
       type: "button",
-      class:"btn btn-primary",
+      class:"btn btn-success ",
       buttonType: "submit",
+      divClass:"d-inline p-2 button",
       click: (value) => {
         this.formSubmitted(value);
       }
@@ -88,7 +80,8 @@ export class CreateComponent implements OnInit {
       type: "button",
       label: "Cancelar",
       buttonType: "button",
-      class:"btn btn-secondary",
+      class:"btn btn-primary",
+      divClass:"d-inline p-2 button",
       click: () => {
         this.back();
       }

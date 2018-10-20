@@ -4,14 +4,13 @@ import { FormGroup } from '@angular/forms';
 @Component({
   selector: 'mr-form-image-load',
   template: `
-  <div [class]= "config.divClass"
-  [formGroup]="group">
-      <div class="btn">
+ 
+  
+      <div [class]="config.divClass" [formGroup]="group">
          <label>{{ config.label }}</label> 
           <input  [formControlName]="config.name" type="file" (change)="config.change($event)" >
       </div>
-    
-  </div>
+
   `,
   styles: []
 })

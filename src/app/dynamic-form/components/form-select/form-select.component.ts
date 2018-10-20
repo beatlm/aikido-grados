@@ -12,6 +12,7 @@ import { FormGroup } from "@angular/forms";
       {{ option }}
     </option>
   </select>
+  <div class="d-inline p-2">
   <input disabled
   [value]="config.value"
   [attr.type]="config.inputType"
@@ -19,6 +20,7 @@ import { FormGroup } from "@angular/forms";
   [attr.placeholder]="config.placeholder"
   [formControlName]="config.name"
   />
+  </div>
 </div>
   `,
   styles: []
