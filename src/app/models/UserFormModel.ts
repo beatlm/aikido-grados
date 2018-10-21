@@ -1,3 +1,5 @@
+import { UserStatusModel } from "./UserStatusModel";
+
 export class UserFormModel {
   public email: string;
   public file: string;
@@ -9,7 +11,6 @@ export class UserFormModel {
     name: string,
     email: string,
     status: string,
-    date: string,
     grado: string,
     file?: string,
     paymentFile?: string

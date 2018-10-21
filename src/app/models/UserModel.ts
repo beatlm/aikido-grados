@@ -1,18 +1,17 @@
 import { UserFormModel } from "./UserFormModel";
+import { UserStatusModel } from "./UserStatusModel";
 
 export class UserModel {
     public name: string;
     public email: string;
-    public status: string;
-    public date: string;
+    public status: Array<UserStatusModel>;
     public grado:string;
     public file?:string;
     public paymentFile?:string;
     constructor(
       name: string,
       email: string,
-      status: string,
-      date: string,
+      status: Array<UserStatusModel>,
       grado:string,
       file?:string,
       paymentFile?:string
@@ -20,23 +19,44 @@ export class UserModel {
       this.name = name;
       this.email = email;
       this.status = status;
-      this.date = date;
       this.grado=grado;
       this.file=file;
       this.paymentFile=paymentFile;
     }
-   
+    private getTodayDate() {
+      var today = new Date();
+      var dd = today.getDate();
+      var mm = today.getMonth() + 1; //January is 0!
+      var yyyy = today.getFullYear();
+      let day: String;
+      let month: String;
+  
+      if (dd < 10) {
+        day = "0" + dd;
+      } else {
+        day = dd.toString();
+      }
+  
+      if (mm < 10) {
+        month = "0" + mm;
+      } else {
+        month = mm.toString();
+      }
+  
+      return day + "/" + month + "/" + yyyy;
+    }
     static fromData(data: UserFormModel) {
-      let { name, email, status, grado, file, paymentFile } = data;
+      const nowStatus= new UserStatusModel(data.status,UserModel.getTodayDate())
       return new this(
         data.name,
         data.email,
-        data.status,
-        "2018-09-10",
+        nowStatus,
         data.grado,
         "",
         "paymentFile"
       );
     }
+
+    
   
   }

@@ -1,4 +1,4 @@
-import { UserServiceService } from './../../services/user-service.service';
+import { UserServiceService } from "./../../services/user-service.service";
 import { UserModel } from "./../../models/UserModel";
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { DynamicFormComponent } from "../../dynamic-form/containers/dynamic-form/dynamic-form.component";
@@ -35,7 +35,7 @@ export class CreateComponent implements OnInit {
       name: "grado",
       type: "select",
       label: "Grado solicitado",
-      options: [["Shodan","S"], ["Nidan o superiores","N"]],
+      options: ["Shodan", "Nidan o superiores"],
       class: "form-control",
       divClass: "container-fluid",
       inputType: "hidden"
@@ -44,11 +44,10 @@ export class CreateComponent implements OnInit {
       name: "status",
       type: "select",
       label: "Estado",
-      options: [["Alta","C"], ["Email","E"],["Cobrado","P"], ["Enviado","S"], ["Entregado","R"]],
-     
+      options: ["Alta", "Email", "Cobrado", "Enviado", "Entregado"],
       class: "form-control",
       divClass: "container-fluid ",
-      dateValue: "03-12-2016"
+      dateValue: this.getTodayDate()
     },
     {
       name: "file",
@@ -93,26 +92,50 @@ export class CreateComponent implements OnInit {
   private back() {
     this.router.navigate([""]);
   }
-  constructor(private router: Router,
-    private userService:UserServiceService) {}
+  constructor(
+    private router: Router,
+    private userService: UserServiceService
+  ) {}
 
   ngOnInit() {}
 
   formSubmitted(data) {
     console.log(data);
     const user: UserModel = UserModel.fromData(data);
+    user.date=this.getTodayDate();
     this.userService.saveUser$(user).subscribe(this.isOkAdd.bind(this));
   }
 
-   /******* ADD   */
- 
- private isOkAdd(value) {
-   this.userForm.form.reset();
-   value.tags = [];
-   this.files = [];
+  /******* ADD   */
 
-   alert("El usuario se ha dado de alta correctamente");
+  private isOkAdd(value) {
+    this.userForm.form.reset();
+    value.tags = [];
+    this.files = [];
 
-   
- }
+    alert("El usuario se ha dado de alta correctamente");
+  }
+
+  private getTodayDate() {
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+    var yyyy = today.getFullYear();
+    let day: String;
+    let month: String;
+
+    if (dd < 10) {
+      day = "0" + dd;
+    } else {
+      day = dd.toString();
+    }
+
+    if (mm < 10) {
+      month = "0" + mm;
+    } else {
+      month = mm.toString();
+    }
+
+    return day + "/" + month + "/" + yyyy;
+  }
 }

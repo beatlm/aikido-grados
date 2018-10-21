@@ -1,4 +1,4 @@
-import { UserServiceService } from './../../services/user-service.service';
+import { UserServiceService } from "./../../services/user-service.service";
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { DynamicFormComponent } from "../../dynamic-form/containers/dynamic-form/dynamic-form.component";
 import { UserModel } from "../../models/UserModel";
@@ -21,44 +21,64 @@ export class SearchComponent implements OnInit {
       divClass: "container-fluid"
     },
     {
+      name: "searchutton",
+      type: "button",
+      label: "Buscar",
+      buttonType: "button",
+      class: "btn btn-primary float-right ",
+      click: () => {
+        this.search();
+      }
+    },
+    {
       name: "table",
       type: "table",
-      list: [
-       // new UserModel("pepe", "pepe@gmail.com", "activo", "20180917", "shidan"),
-        //new UserModel("Roberto", "rover_mp@gmail.com", "activo", "20180917", "nodan")
-      ]
+      class:"table table-striped ",
+      list: null,
     },
-
     {
       name: "addButton",
       type: "button",
       label: "Añadir usuario",
       buttonType: "button",
-      class: "btn btn-primary",
+      class: "btn btn-primary float-left",
       click: () => {
         this.addUser();
       }
     }
   ];
-  constructor(private router: Router,
-    private userService: UserServiceService) {}
+  constructor(
+    private router: Router,
+    private userService: UserServiceService
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+   /* this.myForm.controls.group.valueChanges.subscribe(val => {
+      this.search();
+    });*/
+  }
 
   private addUser() {
     this.router.navigate(["create"]);
   }
-public search(){
-  this.userService
+
+  public search() {
+    const name=this.myForm.form.controls.name.value;
+    if(name!=""){
+    this.userService
+      .getUserListByName$(name)
+      .subscribe(this.showUsers.bind(this), this.catchError.bind(this));
+    }else{
+      this.userService
       .getUserList$()
       .subscribe(this.showUsers.bind(this), this.catchError.bind(this));
-}
-private showUsers(resultado: UserModel[]) {
-  this.myForm.config[0].list = resultado;
-}
+    }
+  }
+  private showUsers(resultado: UserModel[]) {
+    this.myForm.config[2].list = resultado;
+  }
 
-
-private catchError(err) {
-console.log("error "+err);
-}
+  private catchError(err) {
+    console.log("error " + err);
+  }
 }
