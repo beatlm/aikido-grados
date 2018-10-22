@@ -6,8 +6,8 @@ import { FormGroup } from "@angular/forms";
   template: `
   <div [class]= "config.divClass" 
       [formGroup]="group">
-      <button [type]="config.buttonType" [class]="config.class" (click)="config.click()">
-        {{ config.label }}
+      <button *ngFor="let button of config.buttons" [type]="button.buttonType" [class]="button.class" (click)="button.click()">
+        {{ button.label }}
       </button>
     </div>
   `,

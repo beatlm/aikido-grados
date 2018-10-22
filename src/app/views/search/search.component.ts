@@ -7,7 +7,7 @@ import { Router } from "@angular/router";
 @Component({
   selector: "app-search",
   templateUrl: "./search.component.html",
-  styleUrls: ["./search.component.css"]
+  styleUrls: []
 })
 export class SearchComponent implements OnInit {
   @ViewChild(DynamicFormComponent)
@@ -20,31 +20,36 @@ export class SearchComponent implements OnInit {
       placeholder: "Nombre",
       divClass: "container-fluid"
     },
+
     {
-      name: "searchutton",
       type: "button",
-      label: "Buscar",
-      buttonType: "button",
-      class: "btn btn-primary float-right ",
-      click: () => {
-        this.search();
-      }
+      divClass: "d-flex p-2 button",
+      buttons: [
+        {
+          name: "searchutton",
+          label: "Buscar",
+          buttonType: "button",
+          class: "btn btn-primary float-right ",
+          click: () => {
+            this.search();
+          }
+        },
+        {
+          name: "addButton",
+          label: "Añadir usuario",
+          buttonType: "button",
+          class: "btn btn-primary float-left",
+          click: () => {
+            this.addUser();
+          }
+        }
+      ]
     },
     {
       name: "table",
       type: "table",
-      class:"table table-striped ",
-      list: null,
-    },
-    {
-      name: "addButton",
-      type: "button",
-      label: "Añadir usuario",
-      buttonType: "button",
-      class: "btn btn-primary float-left",
-      click: () => {
-        this.addUser();
-      }
+      class: "table table-striped ",
+      list: null
     }
   ];
   constructor(
@@ -53,7 +58,7 @@ export class SearchComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-   /* this.myForm.controls.group.valueChanges.subscribe(val => {
+    /* this.myForm.controls.group.valueChanges.subscribe(val => {
       this.search();
     });*/
   }
@@ -63,15 +68,15 @@ export class SearchComponent implements OnInit {
   }
 
   public search() {
-    const name=this.myForm.form.controls.name.value;
-    if(name!=""){
-    this.userService
-      .getUserListByName$(name)
-      .subscribe(this.showUsers.bind(this), this.catchError.bind(this));
-    }else{
+    const name = this.myForm.form.controls.name.value;
+    if (name != "") {
       this.userService
-      .getUserList$()
-      .subscribe(this.showUsers.bind(this), this.catchError.bind(this));
+        .getUserListByName$(name)
+        .subscribe(this.showUsers.bind(this), this.catchError.bind(this));
+    } else {
+      this.userService
+        .getUserList$()
+        .subscribe(this.showUsers.bind(this), this.catchError.bind(this));
     }
   }
   private showUsers(resultado: UserModel[]) {

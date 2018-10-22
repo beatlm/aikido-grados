@@ -1,18 +1,24 @@
+import { FormGroup } from "@angular/forms";
+import { UserFormModel } from "./../../models/UserFormModel";
 import { UserServiceService } from "./../../services/user-service.service";
 import { UserModel } from "./../../models/UserModel";
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit, ViewChild, AfterViewInit } from "@angular/core";
 import { DynamicFormComponent } from "../../dynamic-form/containers/dynamic-form/dynamic-form.component";
 import { Router } from "@angular/router";
+import { UserStatusModel } from "../../models/UserStatusModel";
 
 @Component({
   selector: "app-create",
   templateUrl: "./create.component.html",
-  styleUrls: ["./create.component.css"]
+  styleUrls: []
 })
-export class CreateComponent implements OnInit {
+export class CreateComponent implements AfterViewInit {
   private files = []; //TODO revisar si es necesario
   @ViewChild(DynamicFormComponent)
   public userForm: DynamicFormComponent;
+  private initialForm: UserFormModel;
+  private initialStatus: Array<UserStatusModel>;
+  // private formBackUp:UserFormModel = this.userForm.form;
   public config = [
     {
       name: "name",
@@ -47,7 +53,8 @@ export class CreateComponent implements OnInit {
       options: ["Alta", "Email", "Cobrado", "Enviado", "Entregado"],
       class: "form-control",
       divClass: "container-fluid ",
-      dateValue: this.getTodayDate()
+      dateValue: this.getTodayDate(),
+      value: new UserStatusModel("Alta", this.getTodayDate())
     },
     {
       name: "file",
@@ -67,26 +74,29 @@ export class CreateComponent implements OnInit {
     },
 
     {
-      name: "saveButton",
-      label: "Guardar",
       type: "button",
-      class: "btn btn-success ",
-      buttonType: "submit",
-      divClass: "d-inline p-2 button",
-      click: value => {
-        this.formSubmitted(value);
-      }
-    },
-    {
-      name: "cancelButton",
-      type: "button",
-      label: "Cancelar",
-      buttonType: "button",
-      class: "btn btn-primary",
-      divClass: "d-inline p-2 button",
-      click: () => {
-        this.back();
-      }
+      divClass: "d-flex p-2 button",
+      buttons: [
+        {
+          buttonType: "button",
+          name: "saveButton",
+          label: "Guardar",
+          class: "btn btn-secondary ",
+          click: value => {
+            this.formSubmitted(value);
+          }
+        },
+        {
+          buttonType: "button",
+          name: "cancelButton",
+          type: "button",
+          label: "Cancelar",
+          class: "btn btn-danger",
+          click: () => {
+            this.back();
+          }
+        }
+      ]
     }
   ];
   private back() {
@@ -96,14 +106,15 @@ export class CreateComponent implements OnInit {
     private router: Router,
     private userService: UserServiceService
   ) {}
-
+  ngAfterViewInit(): void {
+    this.initialStatus = this.userForm.form.controls.status.value;
+  }
   ngOnInit() {}
 
   formSubmitted(data) {
     console.log(data);
     const user: UserModel = UserModel.fromData(data);
-    user.date=this.getTodayDate();
-    this.userService.saveUser$(user).subscribe(this.isOkAdd.bind(this));
+    console.log(user);
   }
 
   /******* ADD   */
