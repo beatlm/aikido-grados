@@ -17,7 +17,7 @@ export class CreateComponent implements AfterViewInit {
   @ViewChild(DynamicFormComponent)
   public userForm: DynamicFormComponent;
   private initialForm: UserFormModel;
-  private initialStatus: Array<UserStatusModel>;
+  //private initialStatus: Array<UserStatusModel>;
   // private formBackUp:UserFormModel = this.userForm.form;
   public config = [
     {
@@ -57,6 +57,14 @@ export class CreateComponent implements AfterViewInit {
       value: new UserStatusModel("Alta", this.getTodayDate())
     },
     {
+      name: "dates",
+      type: "list",
+      label: "Fechas",
+      dates: [],
+    },
+
+
+    {
       name: "file",
       type: "file",
       placeholder: "Fichero de alta",
@@ -78,13 +86,10 @@ export class CreateComponent implements AfterViewInit {
       divClass: "d-flex p-2 button",
       buttons: [
         {
-          buttonType: "button",
+          buttonType: "submit",
           name: "saveButton",
           label: "Guardar",
           class: "btn btn-secondary ",
-          click: value => {
-            this.formSubmitted(value);
-          }
         },
         {
           buttonType: "button",
@@ -107,7 +112,7 @@ export class CreateComponent implements AfterViewInit {
     private userService: UserServiceService
   ) {}
   ngAfterViewInit(): void {
-    this.initialStatus = this.userForm.form.controls.status.value;
+   // this.initialStatus = this.userForm.form.controls.status.value;
   }
   ngOnInit() {}
 
