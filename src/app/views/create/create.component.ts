@@ -53,16 +53,19 @@ export class CreateComponent implements AfterViewInit {
       options: ["Alta", "Email", "Cobrado", "Enviado", "Entregado"],
       class: "form-control",
       divClass: "container-fluid ",
-      dateValue: this.getTodayDate(),
-      value: new UserStatusModel("Alta", this.getTodayDate())
     },
     {
       name: "dates",
-      type: "list",
-      label: "Fechas",
-      dates: [],
+      type: "dates",
+      labelClass:"dates",
+      divClass:"dates-group container-fluid",
+      class:"dates",
+      fechaAlta: "44/66/7777",
+      fechaEmail: "11/26/7777",
+      fechaPagado: "11/26/7777",
+      fechaEnviado: "11/26/7777",
+      fechaRecibido:""
     },
-
 
     {
       name: "file",
@@ -89,7 +92,7 @@ export class CreateComponent implements AfterViewInit {
           buttonType: "submit",
           name: "saveButton",
           label: "Guardar",
-          class: "btn btn-secondary ",
+          class: "btn btn-secondary "
         },
         {
           buttonType: "button",
@@ -112,7 +115,7 @@ export class CreateComponent implements AfterViewInit {
     private userService: UserServiceService
   ) {}
   ngAfterViewInit(): void {
-   // this.initialStatus = this.userForm.form.controls.status.value;
+    // this.initialStatus = this.userForm.form.controls.status.value;
   }
   ngOnInit() {}
 
@@ -132,26 +135,5 @@ export class CreateComponent implements AfterViewInit {
     alert("El usuario se ha dado de alta correctamente");
   }
 
-  private getTodayDate() {
-    var today = new Date();
-    var dd = today.getDate();
-    var mm = today.getMonth() + 1; //January is 0!
-    var yyyy = today.getFullYear();
-    let day: String;
-    let month: String;
-
-    if (dd < 10) {
-      day = "0" + dd;
-    } else {
-      day = dd.toString();
-    }
-
-    if (mm < 10) {
-      month = "0" + mm;
-    } else {
-      month = mm.toString();
-    }
-
-    return day + "/" + month + "/" + yyyy;
-  }
+  
 }

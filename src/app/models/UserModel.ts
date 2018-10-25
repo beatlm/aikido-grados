@@ -38,40 +38,9 @@ export class UserModel {
     this.file = file;
     this.paymentFile = paymentFile;
   }
-  private static getTodayDate() {
-    var today = new Date();
-    var dd = today.getDate();
-    var mm = today.getMonth() + 1; //January is 0!
-    var yyyy = today.getFullYear();
-    let day: String;
-    let month: String;
-
-    if (dd < 10) {
-      day = "0" + dd;
-    } else {
-      day = dd.toString();
-    }
-
-    if (mm < 10) {
-      month = "0" + mm;
-    } else {
-      month = mm.toString();
-    }
-
-    return day + "/" + month + "/" + yyyy;
-  }
+  
   static fromData(data: UserFormModel) {
-    if (data.status === "Alta") {
-      data.createDate = UserModel.getTodayDate();
-    } else if (data.status === "Email") {
-      data.emailDate = UserModel.getTodayDate();
-    } else if (data.status === "Cobrado") {
-      data.paymentDate = UserModel.getTodayDate();
-    } else if (data.status === "Enviado") {
-      data.sentDate = UserModel.getTodayDate();
-    } else if (data.status === "Entregado") {
-      data.receivedDate = UserModel.getTodayDate();
-    }
+   
     return new this(
       data.name,
       data.email,

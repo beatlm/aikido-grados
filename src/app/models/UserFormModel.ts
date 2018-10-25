@@ -9,10 +9,10 @@ export class UserFormModel {
   public paymentFile: string;
   public status: string;
   public createDate?: string;
-  public emailDate: string;
-  public paymentDate: string;
-  public sentDate: string;
-  public receivedDate: string;
+  public emailDate?: string;
+  public paymentDate?: string;
+  public sentDate?: string;
+  public receivedDate?: string;
   constructor(
     name: string,
     email: string,

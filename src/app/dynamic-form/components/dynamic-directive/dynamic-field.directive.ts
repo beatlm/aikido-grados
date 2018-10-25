@@ -6,6 +6,7 @@ import { FormButtonComponent } from '../form-button/form-button.component';
 import { FormInputComponent } from '../form-input/form-input.component';
 import { FormSelectComponent } from '../form-select/form-select.component';
 import { FormListComponent } from '../form-list/form-list.component';
+import { FormDatesComponent } from '../form-dates/form-dates.component';
 
 const components = {
     button: FormButtonComponent,
@@ -14,6 +15,7 @@ const components = {
     table: FormTableComponent,
     file:FormImageLoadComponent,
     list:FormListComponent,
+    dates:FormDatesComponent
   };
 
 @Directive({
