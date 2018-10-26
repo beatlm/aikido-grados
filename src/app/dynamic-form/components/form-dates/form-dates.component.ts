@@ -67,7 +67,7 @@ import { FormGroup } from "@angular/forms";
 })
 export class FormDatesComponent implements OnInit {
   config;
-  group: FormGroup;
+  date: FormGroup;
   constructor() {}
 
   ngOnInit() {}
