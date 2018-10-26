@@ -43,7 +43,7 @@ import { FormGroup } from "@angular/forms";
   <label [class] ="config.labelClass">Fecha Recibido</label>
 
 </div>
-<div [class]= "config.divClass"  [formGroup]="group">
+<div [class]= "config.divClass"  [formGroup]="date">
       <input
       type="date"
       [value]="config.fechaEnviado"
