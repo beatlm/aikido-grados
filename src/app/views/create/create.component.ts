@@ -60,11 +60,11 @@ export class CreateComponent implements AfterViewInit {
       labelClass:"dates",
       divClass:"dates-group container-fluid",
       class:"dates",
-      fechaAlta: "44/66/7777",
-      fechaEmail: "11/26/7777",
-      fechaPagado: "11/26/7777",
-      fechaEnviado: "11/26/7777",
-      fechaRecibido:""
+      createDate: "44/66/7777",
+      emailDate: "11/26/7777",
+      paymentDate: "11/26/7777",
+      sentDate: "11/26/7777",
+      receivedDate:""
     },
 
     {
