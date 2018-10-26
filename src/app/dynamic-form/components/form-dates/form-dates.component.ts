@@ -9,7 +9,7 @@ import { FormGroup } from "@angular/forms";
     <label [class] ="config.labelClass">Fecha Email</label>
     <label [class] ="config.labelClass">Fecha Cobrado</label>
 </div>
-<div [class]= "config.divClass"  [formGroup]="group">
+<div [class]= "config.divClass"  [formGroup]="date">
       <input
       type="date"
       [value]="config.fechaAlta"
