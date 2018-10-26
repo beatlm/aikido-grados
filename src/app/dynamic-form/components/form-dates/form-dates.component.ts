@@ -24,7 +24,7 @@ import { FormGroup } from "@angular/forms";
       [attr.disabled]="config.disabled"
       [class] ="config.class"
       placeholder="dd/mm/aaaa"
-      [formControlName]="emailDate"
+      formControlName="config.emailDate"
       />
 
       <input
@@ -33,7 +33,7 @@ import { FormGroup } from "@angular/forms";
         [attr.disabled]="config.disabled"
         [class] ="config.class"
         placeholder="dd/mm/aaaa"
-        [formControlName]="paymentDate"
+        formControlName="config.paymentDate"
         />
   </div>
 
@@ -50,7 +50,7 @@ import { FormGroup } from "@angular/forms";
       [attr.disabled]="config.disabled"
       [class] ="config.class"
       placeholder="dd/mm/aaaa"
-      [formControlName]="sentDate"
+      formControlName="config.sentDate"
       />
 
       <input
@@ -59,7 +59,7 @@ import { FormGroup } from "@angular/forms";
       [attr.disabled]="config.disabled"
       [class] ="config.class"
       placeholder="dd/mm/aaaa"
-      [formControlName]="receivedDate"
+      formControlName="config.receivedDate"
       />
 </div>
   `,
