@@ -9,7 +9,7 @@ import { FormGroup } from "@angular/forms";
     <label [class] ="config.labelClass">Fecha Email</label>
     <label [class] ="config.labelClass">Fecha Cobrado</label>
 </div>
-<div [class]= "config.divClass"  [formGroup]="date">
+<div [class]= "config.divClass"  [formGroup]="group">
       <input
       type="date"
       [value]="config.fechaAlta"
@@ -43,7 +43,7 @@ import { FormGroup } from "@angular/forms";
   <label [class] ="config.labelClass">Fecha Recibido</label>
 
 </div>
-<div [class]= "config.divClass"  [formGroup]="date">
+<div [class]= "config.divClass"  [formGroup]="group">
       <input
       type="date"
       [value]="config.fechaEnviado"
@@ -67,7 +67,7 @@ import { FormGroup } from "@angular/forms";
 })
 export class FormDatesComponent implements OnInit {
   config;
-  date: FormGroup;
+  group: FormGroup;
   constructor() {}
 
   ngOnInit() {}
