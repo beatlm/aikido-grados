@@ -16,7 +16,7 @@ import { FormGroup } from "@angular/forms";
         [attr.disabled]="config.disabled"
         [class] ="config.class"
         placeholder="dd/mm/aaaa"
-        [formControlName]="createDate"
+        formControlName="config.createDate"
         />
     <input
       type="date"
