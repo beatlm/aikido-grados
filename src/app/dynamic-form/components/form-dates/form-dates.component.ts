@@ -5,69 +5,25 @@ import { FormGroup } from "@angular/forms";
   selector: "mr-form-input-component",
   template: `
   <div [class]= "config.divClass">
-    <label [class] ="config.labelClass">Fecha Alta</label>
-    <label [class] ="config.labelClass">Fecha Email</label>
-    <label [class] ="config.labelClass">Fecha Cobrado</label>
-</div>
-<div [class]= "config.divClass"  [formGroup]="group">
-      <input
-      type="date"
-      [value]="config.fechaAlta"
-        [attr.disabled]="config.disabled"
-        [class] ="config.class"
-        placeholder="dd/mm/aaaa"
-        formControlName="config.createDate"
-        />
-    <input
-      type="date"
-      [value]="config.fechaEmail"
-      [attr.disabled]="config.disabled"
-      [class] ="config.class"
-      placeholder="dd/mm/aaaa"
-      formControlName="config.emailDate"
-      />
-
-      <input
-      type="date"
-      [value]="config.fechaCobrado"
-        [attr.disabled]="config.disabled"
-        [class] ="config.class"
-        placeholder="dd/mm/aaaa"
-        formControlName="config.paymentDate"
-        />
+    <label [class] ="config.labelClass">{{config.label}}</label>
   </div>
-
-
-  <div [class]= "config.divClass">
-  <label [class] ="config.labelClass">Fecha Enviado</label>
-  <label [class] ="config.labelClass">Fecha Recibido</label>
-
-</div>
-<div [class]= "config.divClass"  [formGroup]="group">
-      <input
+  <div [class]= "config.divClass"  [formGroup]="group" >
+      <input  
       type="date"
-      [value]="config.fechaEnviado"
+      [value]="config.value | date:'yyyy-MM-dd'"
       [attr.disabled]="config.disabled"
       [class] ="config.class"
       placeholder="dd/mm/aaaa"
-      formControlName="config.sentDate"
-      />
-
-      <input
-      type="date"
-      [value]="config.fechaRecibido"
-      [attr.disabled]="config.disabled"
-      [class] ="config.class"
-      placeholder="dd/mm/aaaa"
-      formControlName="config.receivedDate"
-      />
-</div>
+      [formControlName]="config.name"
+       />
+  </div>
   `,
   styles: []
 })
 export class FormDatesComponent implements OnInit {
   config;
   group: FormGroup;
+
   constructor() {}
 
   ngOnInit() {}

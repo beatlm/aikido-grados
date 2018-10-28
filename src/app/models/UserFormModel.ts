@@ -8,20 +8,20 @@ export class UserFormModel {
   public grado: string;
   public paymentFile: string;
   public status: string;
-  public createDate?: string;
-  public emailDate?: string;
-  public paymentDate?: string;
-  public sentDate?: string;
-  public receivedDate?: string;
+  public createDate?: Date;
+  public emailDate?: Date;
+  public paymentDate?: Date;
+  public sentDate?: Date;
+  public receivedDate?: Date;
   constructor(
     name: string,
     email: string,
     status: string,
-    createDate: string,
-    emailDate: string,
-    paymentDate: string,
-    sentDate: string,
-    receivedDate: string,
+    createDate: Date,
+    emailDate: Date,
+    paymentDate: Date,
+    sentDate: Date,
+    receivedDate: Date,
     grado: string,
     file?: string,
     paymentFile?: string

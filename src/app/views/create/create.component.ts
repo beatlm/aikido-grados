@@ -6,6 +6,7 @@ import { Component, OnInit, ViewChild, AfterViewInit } from "@angular/core";
 import { DynamicFormComponent } from "../../dynamic-form/containers/dynamic-form/dynamic-form.component";
 import { Router } from "@angular/router";
 import { UserStatusModel } from "../../models/UserStatusModel";
+import { DateModel } from "../../models/DateModel";
 
 @Component({
   selector: "app-create",
@@ -52,19 +53,52 @@ export class CreateComponent implements AfterViewInit {
       label: "Estado",
       options: ["Alta", "Email", "Cobrado", "Enviado", "Entregado"],
       class: "form-control",
-      divClass: "container-fluid ",
+      divClass: "container-fluid "
     },
     {
-      name: "dates",
+      name: "createDate",
       type: "dates",
-      labelClass:"dates",
-      divClass:"dates-group container-fluid",
-      class:"dates",
-      createDate: "44/66/7777",
-      emailDate: "11/26/7777",
-      paymentDate: "11/26/7777",
-      sentDate: "11/26/7777",
-      receivedDate:""
+      label:"Fecha alta",
+      labelClass: "dates",
+      divClass: "dates-group container-fluid",
+      class: "dates",
+      value: ""
+    },
+    {
+      name: "emailDate",
+      type: "dates",
+      label:"Fecha Email",
+      labelClass: "dates",
+      divClass: "dates-group container-fluid",
+      class: "dates",
+      value: ""
+    },
+    {
+      name: "paymentDate",
+      type: "dates",
+      label:"Fecha Pago",
+      labelClass: "dates",
+      divClass: "dates-group container-fluid",
+      class: "dates",
+      value: "",
+    },
+    {
+      name: "sentDate",
+      type: "dates",
+      label:"Fecha Envio",
+      labelClass: "dates",
+      divClass: "dates-group container-fluid",
+      class: "dates",
+      value: "",
+    },
+    {
+      name: "receivedDate",
+      type: "dates",
+      label:"Fecha Recibido",
+      labelClass: "dates",
+      divClass: "dates-group container-fluid",
+      class: "dates",
+      value: "",
     },
 
     {
@@ -134,6 +168,4 @@ export class CreateComponent implements AfterViewInit {
 
     alert("El usuario se ha dado de alta correctamente");
   }
-
-  
 }

@@ -5,11 +5,11 @@ export class UserModel {
   public name: string;
   public email: string;
   public status: string;
-  public createDate: string;
-  public emailDate: string;
-  public paymentDate: string;
-  public sentDate: string;
-  public receivedDate: string;
+  public createDate: Date;
+  public emailDate: Date;
+  public paymentDate: Date;
+  public sentDate: Date;
+  public receivedDate: Date;
   public grado: string;
   public file?: string;
   public paymentFile?: string;
@@ -17,11 +17,11 @@ export class UserModel {
     name: string,
     email: string,
     status: string,
-    createDate: string,
-    emailDate: string,
-    paymentDate: string,
-    sentDate: string,
-    receivedDate: string,
+    createDate: Date,
+    emailDate: Date,
+    paymentDate: Date,
+    sentDate: Date,
+    receivedDate: Date,
     grado: string,
     file?: string,
     paymentFile?: string
