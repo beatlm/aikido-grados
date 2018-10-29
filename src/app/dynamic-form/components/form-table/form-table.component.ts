@@ -20,9 +20,11 @@ import { FormGroup } from "@angular/forms";
       <td>{{data.email}}</td>
       <td>{{data.status}}</td>
       <td>
-          <a class="btn-small" (click)="config.click(i)">
+      <div (click)="config.click(data.id)">
+          <a class="btn-small" (click)="config.click(data.id)">
               <i class="material-icons left">Ver</i>
           </a>
+          </div>
       </td>
   </tr>
   <div *ngIf="config.list == null">

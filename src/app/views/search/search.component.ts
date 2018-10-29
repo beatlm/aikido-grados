@@ -49,7 +49,10 @@ export class SearchComponent implements OnInit {
       name: "table",
       type: "table",
       class: "table table-striped ",
-      list: null
+      list: null,
+      click: (id) => {
+        this.seeUser(id);
+      }
     }
   ];
   constructor(
@@ -85,5 +88,9 @@ export class SearchComponent implements OnInit {
 
   private catchError(err) {
     console.log("error " + err);
+  }
+
+  private seeUser(id): void {
+    this.router.navigate(["user/" + id]);
   }
 }

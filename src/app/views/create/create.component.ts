@@ -5,8 +5,7 @@ import { UserModel } from "./../../models/UserModel";
 import { Component, OnInit, ViewChild, AfterViewInit } from "@angular/core";
 import { DynamicFormComponent } from "../../dynamic-form/containers/dynamic-form/dynamic-form.component";
 import { Router } from "@angular/router";
-import { UserStatusModel } from "../../models/UserStatusModel";
-import { DateModel } from "../../models/DateModel";
+import { FileModel } from "../../models/FileModel";
 
 @Component({
   selector: "app-create",
@@ -14,12 +13,11 @@ import { DateModel } from "../../models/DateModel";
   styleUrls: []
 })
 export class CreateComponent implements AfterViewInit {
-  private files = []; //TODO revisar si es necesario
   @ViewChild(DynamicFormComponent)
   public userForm: DynamicFormComponent;
-  private initialForm: UserFormModel;
-  //private initialStatus: Array<UserStatusModel>;
-  // private formBackUp:UserFormModel = this.userForm.form;
+  private uploadedFile: FileModel;
+  private paymentFile: FileModel;
+
   public config = [
     {
       name: "name",
@@ -58,7 +56,7 @@ export class CreateComponent implements AfterViewInit {
     {
       name: "createDate",
       type: "dates",
-      label:"Fecha alta",
+      label: "Fecha alta",
       labelClass: "dates",
       divClass: "dates-group container-fluid",
       class: "dates",
@@ -67,7 +65,7 @@ export class CreateComponent implements AfterViewInit {
     {
       name: "emailDate",
       type: "dates",
-      label:"Fecha Email",
+      label: "Fecha Email",
       labelClass: "dates",
       divClass: "dates-group container-fluid",
       class: "dates",
@@ -76,29 +74,29 @@ export class CreateComponent implements AfterViewInit {
     {
       name: "paymentDate",
       type: "dates",
-      label:"Fecha Pago",
+      label: "Fecha Pago",
       labelClass: "dates",
       divClass: "dates-group container-fluid",
       class: "dates",
-      value: "",
+      value: ""
     },
     {
       name: "sentDate",
       type: "dates",
-      label:"Fecha Envio",
+      label: "Fecha Envio",
       labelClass: "dates",
       divClass: "dates-group container-fluid",
       class: "dates",
-      value: "",
+      value: ""
     },
     {
       name: "receivedDate",
       type: "dates",
-      label:"Fecha Recibido",
+      label: "Fecha Recibido",
       labelClass: "dates",
       divClass: "dates-group container-fluid",
       class: "dates",
-      value: "",
+      value: ""
     },
 
     {
@@ -107,7 +105,10 @@ export class CreateComponent implements AfterViewInit {
       placeholder: "Fichero de alta",
       divClass: "file-select container-fluid",
       class: "form-control-file",
-      label: "Fichero de solicitud"
+      label: "Fichero de solicitud",
+      change: event => {
+        this.onFileChange(event, false);
+      }
     },
     {
       name: "paymentFile",
@@ -115,7 +116,10 @@ export class CreateComponent implements AfterViewInit {
       placeholder: "Justificante de pago",
       divClass: "file-select container-fluid",
       class: "form-control-file",
-      label: "Justificante de pago"
+      label: "Justificante de pago",
+      change: event => {
+        this.onFileChange(event, true);
+      }
     },
 
     {
@@ -154,18 +158,48 @@ export class CreateComponent implements AfterViewInit {
   ngOnInit() {}
 
   formSubmitted(data) {
-    console.log(data);
-    const user: UserModel = UserModel.fromData(data);
+    let user: UserModel = UserModel.fromData(data);
+    //Seteamos los ficheros
+    user.file = this.uploadedFile;
+    user.paymentFile=this.paymentFile;
     console.log(user);
+    this.userService.saveUser$(user).subscribe(this.isOkAdd.bind(this), this.catchError.bind(this));
+
   }
 
   /******* ADD   */
 
   private isOkAdd(value) {
     this.userForm.form.reset();
-    value.tags = [];
-    this.files = [];
-
+    this.paymentFile=null;
+    this.uploadedFile=null;
     alert("El usuario se ha dado de alta correctamente");
+  }
+  private catchError(err) {
+    console.log("error " + err);
+    alert(err);
+  }
+
+  onFileChange(event, isPaymentFile) {
+    let reader = new FileReader();
+    if (event.target.files && event.target.files.length > 0) {
+      let file = event.target.files[0];
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        if (isPaymentFile) {
+          this.paymentFile = new FileModel(file.name, file.type, reader.result);
+        } else {
+          this.uploadedFile = new FileModel(
+            file.name,
+            file.type,
+            reader.result
+          );
+        }
+        // filename: file.name,
+        //filetype: file.type,
+        //value: reader.result.split(',')[1]
+        //})
+      };
+    }
   }
 }

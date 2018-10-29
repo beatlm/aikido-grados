@@ -1,5 +1,3 @@
-import { UserStatusModel } from "./UserStatusModel";
-import { AbstractControl, FormControl } from "@angular/forms";
 
 export class UserFormModel {
   public name: string;
@@ -24,7 +22,8 @@ export class UserFormModel {
     receivedDate: Date,
     grado: string,
     file?: string,
-    paymentFile?: string
+    paymentFile?: string,
+
   ) {
     this.name = name;
     this.email = email;
@@ -37,6 +36,7 @@ export class UserFormModel {
     this.grado = grado;
     this.file = file;
     this.paymentFile = paymentFile;
+
   }
   static fromData(data: any) {
     return new this(
@@ -49,7 +49,7 @@ export class UserFormModel {
       data.sentDate,
       data.receivedDate,
       data.grado,
-      "",
+      data.file,
       "paymentFile"
     );
   }

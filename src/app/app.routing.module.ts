@@ -3,6 +3,7 @@ import { CreateComponent } from './views/create/create.component';
 import { Routes, RouterModule } from "@angular/router";
 import { NgModule } from '@angular/core';
 import { SearchComponent } from './views/search/search.component';
+import { UserResolverService } from './services/user-resolver.service';
 
  const routes: Routes = [
 
@@ -10,6 +11,13 @@ import { SearchComponent } from './views/search/search.component';
     path: "create",
     component: CreateComponent,
 
+  },
+  {
+    path: "user/:id",
+    component: CreateComponent,
+    resolve: {
+      recipe: UserResolverService
+    }
   },
   {
     path: "",

@@ -1,5 +1,5 @@
+import { FileModel } from './FileModel';
 import { UserFormModel } from "./UserFormModel";
-import { UserStatusModel } from "./UserStatusModel";
 
 export class UserModel {
   public name: string;
@@ -11,8 +11,8 @@ export class UserModel {
   public sentDate: Date;
   public receivedDate: Date;
   public grado: string;
-  public file?: string;
-  public paymentFile?: string;
+  public file?: FileModel;
+  public paymentFile?: FileModel;
   constructor(
     name: string,
     email: string,
@@ -23,8 +23,8 @@ export class UserModel {
     sentDate: Date,
     receivedDate: Date,
     grado: string,
-    file?: string,
-    paymentFile?: string
+    file?: FileModel,
+    paymentFile?: FileModel
   ) {
     this.name = name;
     this.email = email;
@@ -51,8 +51,8 @@ export class UserModel {
       data.sentDate,
       data.receivedDate,
       data.grado,
-      "",
-      "paymentFile"
+      null,
+      null
     );
   }
 }
