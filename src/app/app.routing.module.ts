@@ -16,7 +16,7 @@ import { UserResolverService } from './services/user-resolver.service';
     path: "user/:id",
     component: CreateComponent,
     resolve: {
-      recipe: UserResolverService
+      user: UserResolverService
     }
   },
   {

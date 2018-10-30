@@ -16,11 +16,27 @@ export class SearchComponent implements OnInit {
     {
       name: "name",
       type: "input",
+      value:"",
       label: "Buscar por nombre",
       placeholder: "Nombre",
-      divClass: "container-fluid"
+      divClass: "container-fluid",
+      change:()=>{
+        console.log("ha cambiado el nombre");
+        this.myForm.form.controls.licence.reset();
+      }
     },
-
+    {
+      name: "licence",
+      value:"",
+      type: "input",
+      label: "Buscar por número de licencia",
+      placeholder: "Licencia",
+      divClass: "container-fluid",
+      change:()=>{
+        console.log("ha cambiado el licence");
+        this.myForm.form.controls.name.reset();
+      }
+    },
     {
       type: "button",
       divClass: "d-flex p-2 button",
@@ -50,7 +66,7 @@ export class SearchComponent implements OnInit {
       type: "table",
       class: "table table-striped ",
       list: null,
-      click: (id) => {
+      click: id => {
         this.seeUser(id);
       }
     }
@@ -72,9 +88,14 @@ export class SearchComponent implements OnInit {
 
   public search() {
     const name = this.myForm.form.controls.name.value;
-    if (name != "") {
+    const licence = this.myForm.form.controls.licence.value;
+    if (name!=null && name != "" ) {
       this.userService
         .getUserListByName$(name)
+        .subscribe(this.showUsers.bind(this), this.catchError.bind(this));
+    } else if (licence!=null && licence != "") {
+      this.userService
+        .getUserListByLicence$(licence)
         .subscribe(this.showUsers.bind(this), this.catchError.bind(this));
     } else {
       this.userService
@@ -83,7 +104,7 @@ export class SearchComponent implements OnInit {
     }
   }
   private showUsers(resultado: UserModel[]) {
-    this.myForm.config[2].list = resultado;
+    this.myForm.config[3].list = resultado;
   }
 
   private catchError(err) {
@@ -91,6 +112,7 @@ export class SearchComponent implements OnInit {
   }
 
   private seeUser(id): void {
+    console.log("seeuser: "+id);
     this.router.navigate(["user/" + id]);
   }
 }

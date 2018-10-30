@@ -6,7 +6,9 @@ import { Observable } from "rxjs/Observable";
 @Injectable()
 export class UserServiceService {
   private url = "https://aikido-grados-api.herokuapp.com/user";
-  private find = "/search/findByNameNO?name=";
+  private find = "/search/findByName?name=";
+  private findLicence = "/search/findByLicenceNumber?licence=";
+
 
   constructor(private http: HttpClient) {}
 
@@ -30,7 +32,19 @@ export class UserServiceService {
       .get<UserModel[]>(this.url + this.find + name)
       .map((result: any) => {
         console.log(result.content); //<--it's an object
-        if (result.page.totalElements) {
+        if (result.page.totalElements>0) {
+          return result.content; //just return "recipes"
+        } else {
+          return null; //TODO ¿Como hacer que no devuelva nada si no hay hnada?
+        }
+      });
+  }
+  public getUserListByLicence$(licence: String): Observable<UserModel[]> {
+    return this.http
+      .get<UserModel[]>(this.url + this.findLicence + licence)
+      .map((result: any) => {
+        console.log(result.content); //<--it's an object
+        if (result.page.totalElements>0) {
           return result.content; //just return "recipes"
         } else {
           return null; //TODO ¿Como hacer que no devuelva nada si no hay hnada?

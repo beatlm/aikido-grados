@@ -3,6 +3,7 @@ import { UserFormModel } from "./UserFormModel";
 
 export class UserModel {
   public name: string;
+  public licence:string;
   public email: string;
   public status: string;
   public createDate: Date;
@@ -15,6 +16,7 @@ export class UserModel {
   public paymentFile?: FileModel;
   constructor(
     name: string,
+    licence:string,
     email: string,
     status: string,
     createDate: Date,
@@ -27,6 +29,7 @@ export class UserModel {
     paymentFile?: FileModel
   ) {
     this.name = name;
+    this.licence=licence;
     this.email = email;
     this.status = status;
     this.createDate = createDate;
@@ -43,6 +46,7 @@ export class UserModel {
    
     return new this(
       data.name,
+      data.licence,
       data.email,
       data.status,
       data.createDate,

@@ -1,6 +1,7 @@
 
 export class UserFormModel {
   public name: string;
+  public licence:string;
   public email: string;
   public file: string;
   public grado: string;
@@ -13,6 +14,7 @@ export class UserFormModel {
   public receivedDate?: Date;
   constructor(
     name: string,
+    licence: string,
     email: string,
     status: string,
     createDate: Date,
@@ -26,6 +28,7 @@ export class UserFormModel {
 
   ) {
     this.name = name;
+    this.licence=licence;
     this.email = email;
     this.status = status;
     this.createDate = createDate;
@@ -41,6 +44,7 @@ export class UserFormModel {
   static fromData(data: any) {
     return new this(
       data.name,
+      data.licence,
       data.email,
       data.status,
       data.createDate,

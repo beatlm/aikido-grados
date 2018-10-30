@@ -16,7 +16,7 @@ export class UserResolverService implements Resolve<Observable<UserModel>> {
   resolve(
     route: ActivatedRouteSnapshot,
     _state: RouterStateSnapshot
-  ): Observable<UserModel>  {
+  ): Observable<UserModel> | Observable<never> {
     let id = route.paramMap.get("id");
     console.log("valor de id;" + id);
     if (id) {

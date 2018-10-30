@@ -1,3 +1,4 @@
+import { UserResolverService } from './services/user-resolver.service';
 import { UserServiceService } from './services/user-service.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -23,7 +24,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,ReactiveFormsModule,DynamicFormModule, HttpClientModule
   ],
-  providers: [UserServiceService],
+  providers: [UserServiceService, UserResolverService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

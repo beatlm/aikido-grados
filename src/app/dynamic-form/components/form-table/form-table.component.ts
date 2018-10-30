@@ -21,7 +21,7 @@ import { FormGroup } from "@angular/forms";
       <td>{{data.status}}</td>
       <td>
       <div (click)="config.click(data.id)">
-          <a class="btn-small" (click)="config.click(data.id)">
+          <a class="btn-small">
               <i class="material-icons left">Ver</i>
           </a>
           </div>

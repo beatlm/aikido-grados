@@ -8,6 +8,7 @@ import { FormGroup } from "@angular/forms";
   [formGroup]="group">
   <label>{{ config.label }}</label>
   <select [formControlName]="config.name" [class]="config.class">
+  <option value="">{{ config.placeholder }}</option>
     <option *ngFor="let option of config.options"  [value]="option">
       {{ option}}
     </option>

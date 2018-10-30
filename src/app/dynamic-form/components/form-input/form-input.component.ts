@@ -9,11 +9,13 @@ import { FormGroup } from '@angular/forms';
     [formGroup]="group">
     <label>{{ config.label }}</label>
     <input
+      [value]="config.value"
       [attr.disabled]="config.disabled"
       [attr.type]="config.inputType"
       [class] ="config.class"
       [attr.placeholder]="config.placeholder"
       [formControlName]="config.name"
+      (focus)="config.change()"
       />
   </div>
   `,
