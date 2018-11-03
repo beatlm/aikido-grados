@@ -5,7 +5,7 @@ import { FormGroup, FormBuilder } from "@angular/forms";
   selector: "mr-dynamic-form",
   template: `
   <form [formGroup]="form"  (ngSubmit)="submitted.emit(form.value)">
-  <div class="form-group">
+  <div class="form-group" >
   <ng-container
         *ngFor="let field of config;"
         dynamicField
@@ -26,7 +26,8 @@ export class DynamicFormComponent implements OnInit {
   @Output()
   submitted: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder,
+  ) {}
 
   ngOnInit() {
     this.form = this.createGroup();

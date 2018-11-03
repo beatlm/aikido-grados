@@ -4,6 +4,9 @@
 
 .form-option{
   display:flex;
+  flex-flow: row ;
+  justify-content:space-around;
+  align-items: baseline;
 }
 .menu-button {
   width: 40%;
@@ -15,6 +18,7 @@
   padding-top: 0;
 }
 label {
+  width: 14em;
   padding-top: 1em;
   font-weight: 300;
 }
@@ -44,6 +48,7 @@ img.logo {
 }
 .dates-group {
   margin-bottom: 0px;
+  display: table-caption;
 }
 .btn-inline {
   margin-top: 0;
@@ -55,4 +60,17 @@ img.logo {
   margin: 1em;
   border: gray 1px solid;
   border-radius: 18px;
+}
+div.loader{
+  position:absolute;
+  top:0;
+  left:0;
+  width: 100%;
+  height:100%;
+  background-color: rgba(105, 104, 104, 0.55);
+}
+img.loader{
+  position:fixed;
+  top:45%;
+  left:45%;
 }

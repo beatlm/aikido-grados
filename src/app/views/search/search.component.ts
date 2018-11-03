@@ -10,6 +10,7 @@ import { Router } from "@angular/router";
   styleUrls: []
 })
 export class SearchComponent implements OnInit {
+  public loading=false;
   @ViewChild(DynamicFormComponent)
   public myForm: DynamicFormComponent;
   public config = [
@@ -73,13 +74,11 @@ export class SearchComponent implements OnInit {
   ];
   constructor(
     private router: Router,
-    private userService: UserServiceService
+    private userService: UserServiceService,
   ) {}
 
   ngOnInit() {
-    /* this.myForm.controls.group.valueChanges.subscribe(val => {
-      this.search();
-    });*/
+
   }
 
   private addUser() {
@@ -87,6 +86,7 @@ export class SearchComponent implements OnInit {
   }
 
   public search() {
+    this.loading=true;
     const name = this.myForm.form.controls.name.value;
     const licence = this.myForm.form.controls.licence.value;
     if (name!=null && name != "" ) {
@@ -104,10 +104,14 @@ export class SearchComponent implements OnInit {
     }
   }
   private showUsers(resultado: UserModel[]) {
+    this.loading=false;
     this.myForm.config[3].list = resultado;
   }
 
   private catchError(err) {
+this.loading=false;
+  //  this.loaderService.stopLoader();
+    alert("Ha ocurrido un error "+err);
     console.log("error " + err);
   }
 

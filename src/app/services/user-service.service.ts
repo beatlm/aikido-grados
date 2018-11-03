@@ -16,6 +16,10 @@ export class UserServiceService {
     return this.http.post(this.url, user);
   }
 
+  public modifyUser$(user: UserModel): Observable<any> {
+    return this.http.patch(this.url+"/"+user.id, user);
+  }
+
   public getUserList$(): Observable<UserModel[]> {
     return this.http.get<UserModel[]>(this.url).map((result: any) => {
       console.log(result.content); //<--it's an object

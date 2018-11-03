@@ -236,7 +236,7 @@ export class CreateComponent implements OnInit {
           type: "input",
           label: "Número de licencia",
           placeholder: "Licencia",
-          divClass: "container-fluid",
+          divClass: "form-option container-fluid",
           class: "form-control",
           value: ""
         },
@@ -246,7 +246,7 @@ export class CreateComponent implements OnInit {
           label: "email",
           inputType: "email",
           placeholder: "e-mail",
-          divClass: "container-fluid",
+          divClass: "form-option container-fluid",
           class: "form-control",
           value: ""
         },
@@ -257,7 +257,7 @@ export class CreateComponent implements OnInit {
           placeholder: "Selecciona un grado",
           options: ["Shodan", "Nidan o superiores"],
           class: "form-control",
-          divClass: "container-fluid",
+          divClass: "form-option container-fluid",
           inputType: "hidden"
         },
         {
@@ -267,7 +267,7 @@ export class CreateComponent implements OnInit {
           placeholder: "Selecciona un estado",
           options: ["Alta", "Email", "Cobrado", "Enviado", "Entregado"],
           class: "form-control",
-          divClass: "container-fluid "
+          divClass: "form-option container-fluid "
         },
         {
           name: "createDate",
@@ -398,12 +398,16 @@ export class CreateComponent implements OnInit {
   }
 
   formSubmitted(data) {
-    let user: UserModel = UserModel.fromData(data);
+    //let user: UserModel = UserModel.fromData(data);
+    //TODO crear un usermodel on los datos del currentUser sustituyendo los del data que no vengan vacios
+    let user: UserModel= UserModel.mixData(data,this.currentUser);
     //Seteamos los ficheros
     user.file = this.uploadedFile;
     user.paymentFile = this.paymentFile;
     console.log(user);
     if (this.currentUser) {
+      this.userService.modifyUser$(user)
+      .subscribe(this.isOkModify.bind(this),this.catchError.bind(this));
       //TODO Llamada método update
     } else {
       this.userService
@@ -415,10 +419,17 @@ export class CreateComponent implements OnInit {
   /******* ADD   */
 
   private isOkAdd(value) {
+    this.resetMyForm();
+    alert("El usuario se ha dado de alta correctamente");
+  }
+  private resetMyForm(){
     this.userForm.form.reset();
     this.paymentFile = null;
     this.uploadedFile = null;
-    alert("El usuario se ha dado de alta correctamente");
+  }
+  private isOkModify(value) {
+    this.resetMyForm();
+    alert("El usuario se ha modificado correctamente");
   }
   private catchError(err) {
     console.log("error " + err);

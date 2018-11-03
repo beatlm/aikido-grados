@@ -1,11 +1,13 @@
+import { FileModel } from './FileModel';
 
 export class UserFormModel {
+  public id: string;
   public name: string;
   public licence:string;
   public email: string;
-  public file: string;
+  public file: FileModel;
   public grado: string;
-  public paymentFile: string;
+  public paymentFile: FileModel;
   public status: string;
   public createDate?: Date;
   public emailDate?: Date;
@@ -13,6 +15,7 @@ export class UserFormModel {
   public sentDate?: Date;
   public receivedDate?: Date;
   constructor(
+    id:string,
     name: string,
     licence: string,
     email: string,
@@ -23,10 +26,11 @@ export class UserFormModel {
     sentDate: Date,
     receivedDate: Date,
     grado: string,
-    file?: string,
-    paymentFile?: string,
+    file?: FileModel,
+    paymentFile?: FileModel,
 
   ) {
+    this.id=id;
     this.name = name;
     this.licence=licence;
     this.email = email;
@@ -43,6 +47,7 @@ export class UserFormModel {
   }
   static fromData(data: any) {
     return new this(
+      data.id,
       data.name,
       data.licence,
       data.email,
@@ -54,7 +59,7 @@ export class UserFormModel {
       data.receivedDate,
       data.grado,
       data.file,
-      "paymentFile"
+     data.paymentFile
     );
   }
 }
