@@ -2,11 +2,11 @@
 export class FileModel {
   public name: string;
   public type: string;
-  public content:string|ArrayBuffer;
+  public fileContent:string|ArrayBuffer;
 
-  constructor(name: string, type: string, content:string|ArrayBuffer) {
+  constructor(name: string, type: string, fileContent:string|ArrayBuffer) {
     this.name = name;
     this.type = type;
-    this.content=content;
+    this.fileContent=fileContent;
   }
 }

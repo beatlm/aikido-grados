@@ -45,7 +45,7 @@ export class SearchComponent implements OnInit {
           name: "searchutton",
           label: "Buscar",
           buttonType: "button",
-          class: "btn btn-primary float-right ",
+          class: "menu-button btn btn-primary float-right ",
           click: () => {
             this.search();
           }
@@ -54,7 +54,7 @@ export class SearchComponent implements OnInit {
           name: "addButton",
           label: "Añadir usuario",
           buttonType: "button",
-          class: "btn btn-primary float-left",
+          class: "menu-button btn btn-primary float-left",
           click: () => {
             this.addUser();
           }
