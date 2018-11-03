@@ -66,7 +66,8 @@ export class CreateComponent implements OnInit {
           placeholder: "e-mail",
           divClass: "form-option container-fluid",
           class: "form-control",
-          value: this.currentUser.email ? this.currentUser.email : ""
+          value: this.currentUser.email ? this.currentUser.email : "",
+          change: () => {}
         },
         {
           name: "grado",
@@ -229,7 +230,8 @@ export class CreateComponent implements OnInit {
           placeholder: "Nombre",
           divClass: "form-option container-fluid",
           class: "form-control",
-          value: ""
+          value: "",
+          change: () => {}
         },
         {
           name: "licence",
@@ -238,7 +240,8 @@ export class CreateComponent implements OnInit {
           placeholder: "Licencia",
           divClass: "form-option container-fluid",
           class: "form-control",
-          value: ""
+          value: "",
+          change: () => {}
         },
         {
           name: "email",
@@ -248,7 +251,8 @@ export class CreateComponent implements OnInit {
           placeholder: "e-mail",
           divClass: "form-option container-fluid",
           class: "form-control",
-          value: ""
+          value: "",
+          change: () => {}
         },
         {
           name: "grado",
@@ -398,18 +402,19 @@ export class CreateComponent implements OnInit {
   }
 
   formSubmitted(data) {
-    //let user: UserModel = UserModel.fromData(data);
-    //TODO crear un usermodel on los datos del currentUser sustituyendo los del data que no vengan vacios
-    let user: UserModel= UserModel.mixData(data,this.currentUser);
-    //Seteamos los ficheros
-    user.file = this.uploadedFile;
-    user.paymentFile = this.paymentFile;
-    console.log(user);
     if (this.currentUser) {
+      let user: UserModel= UserModel.mixData(data,this.currentUser);
+      //Seteamos los ficheros
+      user.file = this.uploadedFile;
+      user.paymentFile = this.paymentFile;
       this.userService.modifyUser$(user)
       .subscribe(this.isOkModify.bind(this),this.catchError.bind(this));
       //TODO Llamada método update
     } else {
+      let user: UserModel = UserModel.fromData(data);
+       //Seteamos los ficheros
+       user.file = this.uploadedFile;
+       user.paymentFile = this.paymentFile;
       this.userService
         .saveUser$(user)
         .subscribe(this.isOkAdd.bind(this), this.catchError.bind(this));

@@ -4,10 +4,9 @@ import { FormGroup } from "@angular/forms";
 @Component({
   selector: "mr-form-input-component",
   template: `
-  <div [class]= "config.divClass">
-    <label [class] ="config.labelClass">{{config.label}}</label>
-  </div>
+
   <div [class]= "config.divClass"  [formGroup]="group" >
+  <label [class] ="config.labelClass">{{config.label}}</label>
       <input  
       type="date"
       [value]="config.value | date:'yyyy-MM-dd'"
