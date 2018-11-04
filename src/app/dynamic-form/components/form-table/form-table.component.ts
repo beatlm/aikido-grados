@@ -21,8 +21,8 @@ import { FormGroup } from "@angular/forms";
       <td>{{data.status}}</td>
       <td>
       <div (click)="config.click(data.id)" >
-          <a class="btn btn-primary" role="button">
-              Ver
+          <a class="table-btn btn btn-secondary" >
+              Modificar
           </a>
           </div>
       </td>

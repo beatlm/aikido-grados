@@ -10,31 +10,31 @@ import { Router } from "@angular/router";
   styleUrls: []
 })
 export class SearchComponent implements OnInit {
-  public loading=false;
+  public loading = false;
   @ViewChild(DynamicFormComponent)
   public myForm: DynamicFormComponent;
   public config = [
     {
       name: "name",
       type: "input",
-      value:"",
+      value: "",
       label: "Buscar por nombre",
       placeholder: "Nombre",
       divClass: "container-fluid",
-      change:()=>{
-        console.log("ha cambiado el nombre");
+      class: "search-input",
+      change: () => {
         this.myForm.form.controls.licence.reset();
       }
     },
     {
       name: "licence",
-      value:"",
+      value: "",
       type: "input",
       label: "Buscar por número de licencia",
       placeholder: "Licencia",
       divClass: "container-fluid",
-      change:()=>{
-        console.log("ha cambiado el licence");
+      class: "search-input",
+      change: () => {
         this.myForm.form.controls.name.reset();
       }
     },
@@ -46,7 +46,7 @@ export class SearchComponent implements OnInit {
           name: "searchutton",
           label: "Buscar",
           buttonType: "button",
-          class: "menu-button btn btn-primary float-right ",
+          class: "menu-button btn btn-danger float-right ",
           click: () => {
             this.search();
           }
@@ -55,7 +55,7 @@ export class SearchComponent implements OnInit {
           name: "addButton",
           label: "Añadir usuario",
           buttonType: "button",
-          class: "menu-button btn btn-primary float-left",
+          class: "menu-button btn btn-success float-left",
           click: () => {
             this.addUser();
           }
@@ -74,26 +74,24 @@ export class SearchComponent implements OnInit {
   ];
   constructor(
     private router: Router,
-    private userService: UserServiceService,
+    private userService: UserServiceService
   ) {}
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   private addUser() {
     this.router.navigate(["create"]);
   }
 
   public search() {
-    this.loading=true;
+    this.loading = true;
     const name = this.myForm.form.controls.name.value;
     const licence = this.myForm.form.controls.licence.value;
-    if (name!=null && name != "" ) {
+    if (name != null && name != "") {
       this.userService
         .getUserListByName$(name)
         .subscribe(this.showUsers.bind(this), this.catchError.bind(this));
-    } else if (licence!=null && licence != "") {
+    } else if (licence != null && licence != "") {
       this.userService
         .getUserListByLicence$(licence)
         .subscribe(this.showUsers.bind(this), this.catchError.bind(this));
@@ -104,19 +102,18 @@ export class SearchComponent implements OnInit {
     }
   }
   private showUsers(resultado: UserModel[]) {
-    this.loading=false;
+    this.loading = false;
     this.myForm.config[3].list = resultado;
   }
 
   private catchError(err) {
-this.loading=false;
-  //  this.loaderService.stopLoader();
-    alert("Ha ocurrido un error "+err);
+    this.loading = false;
+    alert("Ha ocurrido un error " + err);
     console.log("error " + err);
   }
 
   private seeUser(id): void {
-    console.log("seeuser: "+id);
+    console.log("seeuser: " + id);
     this.router.navigate(["user/" + id]);
   }
 }

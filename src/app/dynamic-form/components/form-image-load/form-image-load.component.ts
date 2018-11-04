@@ -10,7 +10,7 @@ import { FormGroup } from "@angular/forms";
          <label>{{ config.label }}</label>
          <div [class]="config.divClass">
           <label class="file-label"> {{ [config.fileName ]}}</label>
-          <button  class="btn-inline btn btn-primary" (click)="fileInput.click()" type="button">
+          <button  class="btn-inline btn btn-info" (click)="fileInput.click()" type="button">
             <span>Cargar fichero...</span>
             <input  #fileInput hidden [formControlName]="config.name" type="file" (change)="config.change($event)" >
           </button>

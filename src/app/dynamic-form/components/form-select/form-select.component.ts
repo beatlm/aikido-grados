@@ -10,7 +10,7 @@ import { FormGroup } from "@angular/forms";
   <select [formControlName]="config.name" [class]="config.class" >
   <option value="">{{ config.placeholder }}</option>
     <option *ngFor="let option of config.options; " [selected]='option == config.value' [value]="option" >
-      {{ option}}{{option==config.value}}
+      {{ option}}
     </option>
   </select>
 </div>

@@ -20,6 +20,7 @@ export class CreateComponent implements OnInit {
   private paymentFile: FileModel;
   private currentUser: UserModel;
   public config: any;
+  public loading:boolean;
 
   private back() {
     this.router.navigate([""]);
@@ -61,7 +62,7 @@ export class CreateComponent implements OnInit {
         {
           name: "email",
           type: "input",
-          label: "email",
+          label: "Email",
           inputType: "email",
           placeholder: "e-mail",
           divClass: "form-option container-fluid",
@@ -85,7 +86,7 @@ export class CreateComponent implements OnInit {
           type: "select",
           label: "Estado",
           placeholder: "Selecciona un estado",
-          options: ["Alta", "Email", "Cobrado", "Enviado", "Entregado"],
+          options: ["Alta", "Email", "Cobrado", "Enviado", "Recibido"],
           class: "form-control",
           divClass: "form-option container-fluid ",
           value: this.currentUser.status ? this.currentUser.status : ""
@@ -93,9 +94,9 @@ export class CreateComponent implements OnInit {
         {
           name: "createDate",
           type: "dates",
-          label: "Fecha alta",
+          label: "Fecha Alta",
           labelClass: "dates",
-          divClass: "form-option dates-group container-fluid",
+          divClass: "dates-group container-fluid",
           class: "dates",
           value: this.currentUser.createDate ? this.currentUser.createDate : ""
         },
@@ -104,7 +105,7 @@ export class CreateComponent implements OnInit {
           type: "dates",
           label: "Fecha Email",
           labelClass: "dates",
-          divClass: "form-option dates-group container-fluid",
+          divClass: "dates-group container-fluid",
           class: "dates",
           value: this.currentUser.emailDate ? this.currentUser.emailDate : ""
         },
@@ -122,7 +123,7 @@ export class CreateComponent implements OnInit {
         {
           name: "sentDate",
           type: "dates",
-          label: "Fecha Envio",
+          label: "Fecha Envío",
           labelClass: "dates",
           divClass: "dates-group container-fluid",
           class: "dates",
@@ -184,7 +185,7 @@ export class CreateComponent implements OnInit {
               buttonType: "button",
               name: "saveAsButton",
               type: "button",
-              label: "Descargar justificante",
+              label: "Descargar fichero",
               class: "btn-inline btn btn-danger",
               click: () => {
                 if (this.paymentFile) {
@@ -246,7 +247,7 @@ export class CreateComponent implements OnInit {
         {
           name: "email",
           type: "input",
-          label: "email",
+          label: "Email",
           inputType: "email",
           placeholder: "e-mail",
           divClass: "form-option container-fluid",
@@ -269,14 +270,14 @@ export class CreateComponent implements OnInit {
           type: "select",
           label: "Estado",
           placeholder: "Selecciona un estado",
-          options: ["Alta", "Email", "Cobrado", "Enviado", "Entregado"],
+          options: ["Alta", "Email", "Cobrado", "Enviado", "Recibido"],
           class: "form-control",
           divClass: "form-option container-fluid "
         },
         {
           name: "createDate",
           type: "dates",
-          label: "Fecha alta",
+          label: "Fecha Alta",
           labelClass: "dates",
           divClass: "dates-group container-fluid",
           class: "dates",
@@ -335,7 +336,7 @@ export class CreateComponent implements OnInit {
               name: "saveAsButton",
               type: "button",
               label: "Descargar fichero",
-              class: "btn-inline btn btn-danger ",
+              class: "btn-inline btn btn-secondary ",
               click: () => {
                 if (this.uploadedFile) {
                   this.saveToFileSystem(this.uploadedFile.fileContent, true);
@@ -362,8 +363,8 @@ export class CreateComponent implements OnInit {
               buttonType: "button",
               name: "saveAsButton",
               type: "button",
-              label: "Descargar justificante",
-              class: "btn-inline btn btn-danger",
+              label: "Descargar fichero",
+              class: "btn-inline btn btn-secondary",
               click: () => {
                 if (this.paymentFile) {
                   this.saveToFileSystem(this.paymentFile.fileContent, false);
@@ -390,7 +391,7 @@ export class CreateComponent implements OnInit {
               name: "cancelButton",
               type: "button",
               label: "Cancelar",
-              class: "menu-button btn btn-primary ",
+              class: "menu-button btn btn-danger ",
               click: () => {
                 this.back();
               }
@@ -402,6 +403,7 @@ export class CreateComponent implements OnInit {
   }
 
   formSubmitted(data) {
+    this.loading=true;
     if (this.currentUser) {
       let user: UserModel= UserModel.mixData(data,this.currentUser);
       //Seteamos los ficheros
@@ -409,7 +411,6 @@ export class CreateComponent implements OnInit {
       user.paymentFile = this.paymentFile;
       this.userService.modifyUser$(user)
       .subscribe(this.isOkModify.bind(this),this.catchError.bind(this));
-      //TODO Llamada método update
     } else {
       let user: UserModel = UserModel.fromData(data);
        //Seteamos los ficheros
@@ -424,7 +425,8 @@ export class CreateComponent implements OnInit {
   /******* ADD   */
 
   private isOkAdd(value) {
-    this.resetMyForm();
+    this.loading=false;
+    this.router.navigate([""]);
     alert("El usuario se ha dado de alta correctamente");
   }
   private resetMyForm(){
@@ -433,10 +435,12 @@ export class CreateComponent implements OnInit {
     this.uploadedFile = null;
   }
   private isOkModify(value) {
+    this.loading=false;
     this.resetMyForm();
     alert("El usuario se ha modificado correctamente");
   }
   private catchError(err) {
+    this.loading=false;
     console.log("error " + err);
     alert(err);
   }

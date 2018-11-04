@@ -18,7 +18,7 @@
   padding-top: 0;
 }
 label {
-  width: 14em;
+  width: 17em;
   padding-top: 1em;
   font-weight: 300;
 }
@@ -37,8 +37,6 @@ img.logo {
 }
 .file-select {
   display: flex;
-  margin-bottom: 1em;
-  margin-top: 1em;
 }
 
 .dates {
@@ -48,6 +46,7 @@ img.logo {
 }
 .dates-group {
   margin-bottom: 0px;
+  margin-left: 10em;
 
 }
 .btn-inline {
@@ -62,7 +61,7 @@ img.logo {
   border-radius: 18px;
 }
 div.loader{
-  position:absolute;
+  position:fixed;
   top:0;
   left:0;
   width: 100%;
@@ -73,4 +72,10 @@ img.loader{
   position:fixed;
   top:45%;
   left:45%;
+}
+.search-input{
+  width: 50%;
+}
+.table-btn{
+  background-color: #e8e8e8;
 }
