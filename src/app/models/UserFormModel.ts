@@ -1,7 +1,6 @@
 import { FileModel } from './FileModel';
 
 export class UserFormModel {
-  public id: string;
   public name: string;
   public licence:string;
   public email: string;
@@ -15,7 +14,6 @@ export class UserFormModel {
   public sentDate?: Date;
   public receivedDate?: Date;
   constructor(
-    id:string,
     name: string,
     licence: string,
     email: string,
@@ -30,7 +28,6 @@ export class UserFormModel {
     paymentFile?: FileModel,
 
   ) {
-    this.id=id;
     this.name = name;
     this.licence=licence;
     this.email = email;
@@ -47,7 +44,6 @@ export class UserFormModel {
   }
   static fromData(data: any) {
     return new this(
-      data.id,
       data.name,
       data.licence,
       data.email,

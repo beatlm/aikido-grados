@@ -2,7 +2,6 @@ import { FileModel } from "./FileModel";
 import { UserFormModel } from "./UserFormModel";
 
 export class UserModel {
-  public id: string;
   public name: string;
   public licence: string;
   public email: string;
@@ -16,7 +15,6 @@ export class UserModel {
   public file?: FileModel;
   public paymentFile?: FileModel;
   constructor(
-    id: string,
     name: string,
     licence: string,
     email: string,
@@ -30,7 +28,6 @@ export class UserModel {
     file?: FileModel,
     paymentFile?: FileModel
   ) {
-    this.id = id;
     this.name = name;
     this.licence = licence;
     this.email = email;
@@ -87,7 +84,6 @@ export class UserModel {
   }
   static fromData(data: UserFormModel) {
     return new this(
-      data.id,
       data.name,
       data.licence,
       data.email,

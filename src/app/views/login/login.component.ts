@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit {
 
   private isOkAdd(value) {
     this.loading=false;
-    this.router.navigate(["/search"]);
+    this.router.navigate(["search"]);
     console.log("El usuario se ha logado correctamente " + value.name);
   }
   private catchError(err) {

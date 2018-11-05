@@ -20,7 +20,7 @@ import { FormGroup } from "@angular/forms";
       <td>{{data.email}}</td>
       <td>{{data.status}}</td>
       <td>
-      <div (click)="config.click(data.id)" >
+      <div (click)="config.click(data.licence)" >
           <a class="table-btn btn btn-secondary" >
               Modificar
           </a>

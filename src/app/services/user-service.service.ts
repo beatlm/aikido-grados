@@ -17,7 +17,7 @@ export class UserServiceService {
   }
 
   public modifyUser$(user: UserModel): Observable<any> {
-    return this.http.patch(this.url+"/"+user.id, user);
+    return this.http.patch(this.url+"/"+user.licence, user);
   }
 
   public getUserList$(): Observable<UserModel[]> {

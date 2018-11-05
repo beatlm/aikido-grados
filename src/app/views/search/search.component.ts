@@ -67,8 +67,8 @@ export class SearchComponent implements OnInit {
       type: "table",
       class: "table table-striped ",
       list: null,
-      click: id => {
-        this.seeUser(id);
+      click: licence=> {
+        this.seeUser(licence);
       }
     }
   ];
@@ -112,8 +112,8 @@ export class SearchComponent implements OnInit {
     console.log("error " + err);
   }
 
-  private seeUser(id): void {
-    console.log("seeuser: " + id);
-    this.router.navigate(["user/" + id]);
+  private seeUser(licence): void {
+    console.log("seeuser: " + licence);
+    this.router.navigate(["user/" + licence]);
   }
 }
