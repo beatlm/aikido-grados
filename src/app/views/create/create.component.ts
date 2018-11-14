@@ -216,7 +216,7 @@ export class CreateComponent implements OnInit {
               label: "Cancelar",
               class: "menu-button btn btn-primary",
               click: () => {
-                this.back();
+                this.router.navigate(["/search"]);
               }
             }
           ]
@@ -393,7 +393,7 @@ export class CreateComponent implements OnInit {
               label: "Cancelar",
               class: "menu-button btn btn-danger ",
               click: () => {
-                this.back();
+                this.router.navigate(["/search"]);
               }
             }
           ]
