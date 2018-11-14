@@ -428,6 +428,7 @@ export class CreateComponent implements OnInit {
     this.loading=false;
     this.router.navigate([""]);
     alert("El usuario se ha dado de alta correctamente");
+    this.router.navigate(["/search"]);
   }
   private resetMyForm(){
     this.userForm.form.reset();
@@ -438,6 +439,7 @@ export class CreateComponent implements OnInit {
     this.loading=false;
     this.resetMyForm();
     alert("El usuario se ha modificado correctamente");
+    this.router.navigate(["/search"]);
   }
   private catchError(err) {
     this.loading=false;
