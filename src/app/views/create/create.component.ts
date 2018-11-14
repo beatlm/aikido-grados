@@ -75,7 +75,7 @@ export class CreateComponent implements OnInit {
           type: "select",
           label: "Grado solicitado",
           placeholder: "Selecciona un grado",
-          options: ["Shodan", "Nidan o superiores"],
+          options: ["Shodan", "Nidan","Sandan","Yondan","Godam"],
           class: "form-control",
           divClass: "form-option container-fluid",
           inputType: "hidden",
@@ -260,7 +260,7 @@ export class CreateComponent implements OnInit {
           type: "select",
           label: "Grado solicitado",
           placeholder: "Selecciona un grado",
-          options: ["Shodan", "Nidan o superiores"],
+          options: ["Shodan", "Nidan","Sandan","Yondan","Godam"],
           class: "form-control",
           divClass: "form-option container-fluid",
           inputType: "hidden"
