@@ -105,6 +105,11 @@
     height: 100%;
     background-color: rgba(105, 104, 104, 0.55);
   }
+  img.loader {
+    position: fixed;
+    top: 40%;
+    left: 30%;
+  }
 }
 /* Extra large devices (large desktops, 1200px and up)*/
 @media only screen and (min-device-width: 812px) {
