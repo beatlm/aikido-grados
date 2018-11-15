@@ -5,9 +5,9 @@ import { Observable } from "rxjs/Observable";
 
 @Injectable()
 export class UserServiceService {
-  private url = "https://aikido-grados-api.herokuapp.com/user";
+  private url = "https://aikido-grados-api.herokuapp.com";
   private find = "/api/findByName?name=";
-  private findLicence = "/search/findByLicenceNumber?licence=";
+  private findLicence = "/user/search/findByLicenceNumber?licence=";
 
 
   constructor(private http: HttpClient) {}
