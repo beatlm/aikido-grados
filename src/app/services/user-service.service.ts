@@ -36,8 +36,8 @@ export class UserServiceService {
       .get<UserModel[]>(this.url + this.find + name)
       .map((result: any) => {
         console.log(result.content); //<--it's an object
-        if (result.page.totalElements>0) {
-          return result.content; //just return "recipes"
+        if (result.length>0) {
+          return result; //just return "recipes"
         } else {
           return null; //TODO ¿Como hacer que no devuelva nada si no hay hnada?
         }
