@@ -90,15 +90,34 @@ export class SearchComponent implements OnInit {
     if (name != null && name != "") {
       this.userService
         .getUserListByName$(name)
-        .subscribe(this.showUsers.bind(this), this.catchError.bind(this));
+        .subscribe(response=> {
+          this.loading = false;
+          this.myForm.config[3].list = response;
+        }, 
+        err => {
+         this.catchError(err);
+        });
+
     } else if (licence != null && licence != "") {
       this.userService
         .getUserListByLicence$(licence)
-        .subscribe(this.showUsers.bind(this), this.catchError.bind(this));
+        .subscribe(response=> {
+          this.loading = false;
+          this.myForm.config[3].list = response;
+        }, 
+        err => {
+         this.catchError(err);
+        });
     } else {
       this.userService
         .getUserList$()
-        .subscribe(this.showUsers.bind(this), this.catchError.bind(this));
+        .subscribe(response=> {
+          this.loading = false;
+          this.myForm.config[3].list = response;
+        }, 
+        err => {
+         this.catchError(err);
+        });
     }
   }
   private showUsers(resultado: UserModel[]) {
@@ -108,8 +127,8 @@ export class SearchComponent implements OnInit {
 
   private catchError(err) {
     this.loading = false;
-    alert("Ha ocurrido un error " + err);
-    console.log("error " + err);
+    this.myForm.config[3].list = null;
+    console.log("Ha ocurrido un error  " + err);
   }
 
   private seeUser(licence): void {
