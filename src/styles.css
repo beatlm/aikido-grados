@@ -192,3 +192,9 @@
     width: 100%;
   }
 }
+
+.logout{
+  color:gray;
+  margin-left: 80%;
+  width: 10%;
+}

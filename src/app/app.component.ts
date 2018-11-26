@@ -6,11 +6,8 @@ import { Component } from "@angular/core";
   styleUrls: ["./app.component.css"]
 })
 export class AppComponent {
-  title = "app";
+  title = "Aikido";
+  ngOnInit() {
 
-  public logout() {
-    // remove user from local storage to log user out
-    localStorage.removeItem("currentUser");
-    alert("Removed localuser")
   }
 }

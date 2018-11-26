@@ -77,7 +77,8 @@ export class SearchComponent implements OnInit {
     private userService: UserServiceService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   private addUser() {
     this.router.navigate(["create"]);

@@ -9,13 +9,15 @@ import { Router } from "@angular/router";
 })
 export class LoginComponent implements OnInit {
   public config: any;
-  public loading:boolean;
+  public loading: boolean;
   constructor(
     private authenticateService: AuthenticateService,
     private router: Router
   ) {}
 
   ngOnInit() {
+    // reset login status
+    this.authenticateService.logout();
     this.config = [
       {
         name: "name",
@@ -55,7 +57,7 @@ export class LoginComponent implements OnInit {
   }
 
   formSubmitted(data) {
-    this.loading=true;
+    this.loading = true;
     console.log("logando " + data.name + "-" + data.password);
     this.authenticateService
       .login(data.name, data.password)
@@ -63,12 +65,12 @@ export class LoginComponent implements OnInit {
   }
 
   private isOkAdd(value) {
-    this.loading=false;
+    this.loading = false;
     this.router.navigate(["search"]);
     console.log("El usuario se ha logado correctamente " + value.name);
   }
   private catchError(err) {
-    this.loading=false;
+    this.loading = false;
     console.log("error " + err);
     alert("No se ha podido logar correctamente");
   }
