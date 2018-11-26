@@ -1,4 +1,4 @@
-import { FormGroup } from "@angular/forms";
+import { FormGroup, Validators } from "@angular/forms";
 import { UserFormModel } from "./../../models/UserFormModel";
 import { UserServiceService } from "./../../services/user-service.service";
 import { UserModel } from "./../../models/UserModel";
@@ -400,10 +400,16 @@ export class CreateComponent implements OnInit {
         }
       ];
     }
+
   }
 
   formSubmitted(data) {
     this.loading=true;
+    //Validamos que llegue el numero de licencia
+    if( data.licence==""){
+      this.loading=false;
+      alert("El numero de licencia es obligatorio");
+    }else{
     if (this.currentUser) {
       let user: UserModel= UserModel.mixData(data,this.currentUser);
       //Seteamos los ficheros
@@ -420,6 +426,7 @@ export class CreateComponent implements OnInit {
         .saveUser$(user)
         .subscribe(this.isOkAdd.bind(this), this.catchError.bind(this));
     }
+  }
   }
 
   /******* ADD   */

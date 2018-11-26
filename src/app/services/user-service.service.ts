@@ -1,13 +1,13 @@
 import { UserModel } from "./../models/UserModel";
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpResponse } from "@angular/common/http";
 import { Observable } from "rxjs/Observable";
 
 @Injectable()
 export class UserServiceService {
-  private url = "https://aikido-grados-api.herokuapp.com";
-  private find = "/api/findByName?name=";
-  private findLicence = "/user/search/findByLicenceNumber?licence=";
+  private url = "https://aikido-grados-api.herokuapp.com/api/user";
+  private findByName = "/findByName?name=";
+  private findByLicence = "/findByLicence?licence=";
 
 
   constructor(private http: HttpClient) {}
@@ -21,39 +21,35 @@ export class UserServiceService {
   }
 
   public getUserList$(): Observable<UserModel[]> {
-    return this.http.get<UserModel[]>(this.url).map((result: any) => {
-      console.log(result.content); //<--it's an object
-      if (result.page.totalElements > 0) {
-        return result.content; //just return "recipes"
-      } else {
-        return null; //TODO ¿Como hacer que no devuelva nada si no hay hnada?
+    return this.http.get<UserModel[]>(this.url, {observe: 'response'})
+    .map((result: any) => {
+      if (result.status !== 200) {
+        throw Error("No hay datos");
       }
+      return result.body; 
     });
   }
 
-  public getUserListByName$(name: String): Observable<UserModel[]> {
+  public getUserListByName$(name: String): Observable<HttpResponse<UserModel[]>> {
     return this.http
-      .get<UserModel[]>(this.url + this.find + name)
-      .map((result: any) => {
-        console.log(result.content); //<--it's an object
-        if (result && result.length>0) {
-          return result; //just return "recipes"
-        } else {
-          return null; //TODO ¿Como hacer que no devuelva nada si no hay hnada?
+      .get<UserModel[]>(this.url + this.findByName + name  , {observe: 'response'})
+     .map((result: any) => {
+        if (result.status !== 200) {
+          throw Error("No hay datos");
         }
+        return result.body; 
       });
   }
   public getUserListByLicence$(licence: String): Observable<UserModel[]> {
     return this.http
-      .get<UserModel[]>(this.url + this.findLicence + licence)
+      .get<UserModel[]>(this.url + this.findByLicence + licence, {observe: 'response'})
       .map((result: any) => {
-        console.log(result.content); //<--it's an object
-        if (result.page.totalElements>0) {
-          return result.content; //just return "recipes"
-        } else {
-          return null; //TODO ¿Como hacer que no devuelva nada si no hay hnada?
-        }
-      });
+         if (result.status !== 200) {
+           throw Error("No hay datos");
+         }
+         return result.body; 
+       });
+   
   }
 
   public getUserDetail$(id: String): Observable<UserModel> {
