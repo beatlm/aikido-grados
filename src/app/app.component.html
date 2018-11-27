@@ -1,5 +1,5 @@
 <div class='container'>
   <img class="logo" src="../assets/aikido.gif" />
 </div>
-<p><a [routerLink]="['/']" class="menu-button btn btn-light logout">Logout</a></p>
+<p><a (click)="logout()" class="menu-button btn btn-light logout" *ngIf="showLogout$ | async" >Logout</a></p>
 <router-outlet></router-outlet>

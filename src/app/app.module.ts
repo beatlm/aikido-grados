@@ -15,6 +15,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { DynamicFormModule } from "./dynamic-form/dynamic-form.module";
 import { SearchComponent } from "./views/search/search.component";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { LogoutService } from "./logout.service";
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,
       multi: true
-    }
+    },
+    LogoutService
   ],
   bootstrap: [AppComponent]
 })
